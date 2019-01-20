@@ -1,0 +1,20 @@
+[Unit]
+Description=minetest server world %i
+# XXX - allow overriding this? env var perhaps
+RequiresMountsFor=/var/lib/minetest/%i/world
+
+[Service]
+Type=forking
+# to override users on a per-instance basis,
+# copy drop-ins/20-user.conf to minetest@some_instance.service.d,
+# and adjust the User= line to suit.
+User=minetestserver
+# connecting: sudo or login as appropriate user,
+# then use tmux -L mt_srv_%i to bind to that specific socket.
+ExecStart=/usr/local/bin/tmux_service mt_srv_%i /usr/local/bin/mtautoserver %i
+KillSignal=SIGINT
+TimeoutStopSec=5
+
+# tmux raises some confusing complaints if this is used;
+# just rely on SIGTERM'ing everything instead.
+#ExecStop=/usr/bin/tmux -L mt_srv_%i kill-server
