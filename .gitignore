@@ -1,0 +1,6 @@
+instance_name.txt
+build.ninja
+*.tmp*
+world_data
+world_data/*
+.ninja*
