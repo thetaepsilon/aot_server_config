@@ -1,5 +1,5 @@
-# Coming soon...
+# \#archlinux-offtopic minetest server config
 
-You're a bit early for the party.
+what it says on the tin, really.
 
-License: TBC
+
