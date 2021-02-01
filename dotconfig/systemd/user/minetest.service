@@ -1,0 +1,14 @@
+[Unit]
+Description=main minetest server
+
+[Service]
+Type=forking
+# needed as tmux's session will be started from a context without any term variables.
+# should be a sane default that will work with most VTEs over SSH.
+Environment=TERM=xterm
+Environment=SHELL=/bin/bash
+# note non-default socket name, use the "attach_minetest" script in home dir
+ExecStart=/usr/bin/tmux -L minetest new-session -d -s minetest %h/server_start_manual_WARNING_CONFLICTS_WITH_SERVICE.sh
+ExecStop=/usr/bin/tmux -L minetest kill-server
+Restart=on-failure
+RestartSec=10
